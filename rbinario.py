@@ -1,4 +1,4 @@
-#Reloj binario
+#Reloj binario y git
 import time
 from rgbmatrix5x5 import RGBMatrix5x5
 from datetime import datetime
