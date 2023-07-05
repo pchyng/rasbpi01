@@ -1,0 +1,5 @@
+Urls usadas:
+
+Librerías RGB 5x5: 
+	https://github.com/pimoroni/rgbmatrix5x5-python
+	https://github.com/pimoroni/rgbmatrix5x5-python/blob/master/library/rgbmatrix5x5/is31fl3731.py
