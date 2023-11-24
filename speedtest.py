@@ -3,7 +3,6 @@ import re
 import subprocess
 import time
 
-#a
 response = subprocess.Popen('/usr/bin/speedtest --accept-license --accept-gdpr', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
 
 ping = re.search('Latency:\s+(.*?)\s', response, re.MULTILINE)
