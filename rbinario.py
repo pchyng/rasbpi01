@@ -2,6 +2,11 @@
 import time
 from rgbmatrix5x5 import RGBMatrix5x5
 from datetime import datetime
+from gpiozero import CPUTemperature
+
+
+cpu = CPUTemperature()
+
 
 print("""
 	Reloj binario v-0.0.1
@@ -31,6 +36,8 @@ oLeds = {
 	"7" : [2,3,4],
 	"8" : [1],
 	"9" : [1,4],
+	"AM": [3,4],
+	"PM": [0,1]
 	
 }
 oColor = {
@@ -43,6 +50,19 @@ def numToBinled(sNumber,sRow):
 		lRet.append( x + ( sRow * 5 ) )
 	return lRet
 	
+def calcColour(temperature):
+	r=0
+	g=0
+	if temperature < 25:
+		r=0
+		g=255
+	elif temperature >75:
+		r=255
+		g=0
+	else:
+		r=int((temperature - 25)*5.1)
+		g=255-r
+	return (r, g, 0)
 #Preconfiguracion del componente RGBMatrix5x5
 rgbmatrix5x5 = RGBMatrix5x5()
 rgbmatrix5x5.set_clear_on_exit()
@@ -62,6 +82,9 @@ while True:
 	current_timeH = now.strftime("%H")
 	current_timeAMPM = now.strftime("%p")
 	
+	#if oldDT != current_timeAMPM:
+	rgbmatrix5x5.set_multiple_pixels([0,1,2,3,4], (0, 0, 0))
+	#oldDT = current_timeAMPM
 	if oldH1 != current_timeH[0]:
 		rgbmatrix5x5.set_multiple_pixels([5,6,7,8,9], (0, 0, 0))
 		oldH1 = current_timeH[0]
@@ -77,20 +100,22 @@ while True:
 	#rgbmatrix5x5.clear()
 	rgbmatrix5x5.show()
 	time.sleep(1)
-	
+	colAMPM = numToBinled(current_timeAMPM,0)
 	col1 = numToBinled(current_timeH[0],1)
 	col2 = numToBinled(current_timeH[1],2)
 	col3 = numToBinled(current_timeM[0],3)
 	col4 = numToBinled(current_timeM[1],4)
 	
-	aToLed = []
+	aToLed = colAMPM
 	aToLed.extend(col1)
 	aToLed.extend(col2)
 	aToLed.extend(col3)
 	aToLed.extend(col4)
 	
-	rgbmatrix5x5.set_multiple_pixels(aToLed, oColor[current_timeAMPM])
-	print(current_time)
+	oColour = calcColour(cpu.temperature)
+#	rgbmatrix5x5.set_multiple_pixels(aToLed, oColor[current_timeAMPM])
+	rgbmatrix5x5.set_multiple_pixels(aToLed, oColour)
+	print("Hora:",current_timeAMPM,current_time,"Color de temp:",oColour," CPU temp:",cpu.temperature)
 	rgbmatrix5x5.show()
 	time.sleep(1)
 	
