@@ -7,7 +7,7 @@ First try to commit
 
 > Modelo de Raspberry Pi actual: `Raspberry Pi 3 Model B Rev 1.2p`
 
-Proyecto principal de desarrollo SAPUI5, contiene la configuración del workspace y todos los proyectos con sus repositorios integrados.
+Proyecto principal de desarrollo en Raspberry, contiene la configuración del workspace y todos los proyectos con sus repositorios integrados.
 
 # Instalación entorno desarrollo:
 
