@@ -14,8 +14,10 @@ ping = ping.group(1)
 download = download.group(1)
 upload = upload.group(1)
 jitter = jitter.group(1)
-f = open('/home/phyng/scripts/rasbpi01/speedtest/speedtest.csv', 'a+')
-if os.stat('/home/phyng/scripts/rasbpi01/speedtest/speedtest.csv').st_size == 0:
-	f.write('Date,Time,Ping (ms),Jitter (ms),Download (Mbps),Upload (Mbps)\r\n')
 
-f.write('{},{},{},{},{},{}\r\n'.format(time.strftime('%m/%d/%y'), time.strftime('%H:%M'), ping, jitter, download, upload))
+print(download)
+#f = open('/home/phyng/scripts/rasbpi01/speedtest/speedtest.csv', 'a+')
+#if os.stat('/home/phyng/scripts/rasbpi01/speedtest/speedtest.csv').st_size == 0:
+#	f.write('Date,Time,Ping (ms),Jitter (ms),Download (Mbps),Upload (Mbps)\r\n')
+
+#f.write('{},{},{},{},{},{}\r\n'.format(time.strftime('%m/%d/%y'), time.strftime('%H:%M'), ping, jitter, download, upload))
